@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1 id="tittle">Web 07 - Ejercicio 03.2</h1>
+<p>Reusando el mismo script que en el ejercicio 03</p>
+    <button onclick="cambiarFondoBody('tomato')"> Change color (Tomato)</button>
+    <button onclick="cambiarFondoBody('#cba5e0')">Change Color (lila)</button>
+    <button onclick="cambiarFondoBody('lightblue')">Change Color (Lightblue)</button>
+
+    <p id="green-paragraph" onclick="changeToGreenColor()">Cambiar a color verde</p>
+    <p
+        id="red-paragraph" 
+        onclick="changeColor(document.getElementById('red-paragraph'), 'red')"
+        >
+        Cambiar a color rojo
+    </p>
+    <p id="blue-paragraph" onclick="changeColor(this, 'blue')">Cambiar a color azul</p>
+    <p onclick="changeColor(this, 'purple')">Cambiar a color morado</p>
+
+    <script src="./myScript.js" defer>
+        console.log("Este mensaje nunca se mostrará")
+    </script>
+</body>
+</html>
