@@ -47,6 +47,12 @@ let valor2 = 4;
 console.log("El resultado de " + valor1 + " * " + valor2 + " = " + valor1 * valor2 + " pesos.");
 console.log(`El resultado de ${valor1} * ${valor2} = ${valor1*valor2} pesos.`);
 
+let cumple = "Jen";
+let regalo = "Peluche";
+
+console.log("Le daré un " + regalo + " a " + cumple + " por ser su cumpleaños");
+
+
 /*
  Tipos de datos number.
 
@@ -68,7 +74,23 @@ console.log( typeof ( 3 + "Viernes temático" ) ); // 'string'
 console.log( typeof ( "3Viernes temático" ) ); // 'string'
 console.log( 4 / 0 ); // +Infinity
 
+/* Comprueba si las siguientes variables son del tipo number*/
+const num1 = 42;
+/* Comprueba si las siguientes variables son del tipo string*/
+const nameCh54 = "Luis";
 
+/* console.log(typeof num1 ===  'number');
+console.log(typeof nameCh54 === 'string'); */
+
+function tipoDeDato(){
+  if(typeof num1 ===  'number' || typeof nameCh54 === 'string'){
+    console.log("El contenido de la variable num1 es un number y el de la variable name Ch54 es string");
+  }else{
+    console.log("uno o ambas variables no son del dato especificado")
+  }
+
+}
+tipoDeDato();
 /*
  Cuando se realizan operaciones que exceden los límites
  de MAX_SAFE_INTEGER se produce una pérdida de precisión.
