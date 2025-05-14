@@ -102,7 +102,10 @@ sintaxis:
 
 */
 
-
+(function setUp(data){
+  console.log(`Configuración inicial de la aplicación`);
+  console.log(`Valor de data ${data}`);
+})(18);
 
 
 
@@ -124,11 +127,42 @@ sintaxis:
     }
 */
 
+// Realizar una función declarada que calcule al área de un triángulo
+// al función debe retornar el resultado.
+// Área = (b*a)/2
+
+function areaDeTriangulo(base, altura){
+  return (base * altura)/2;
+}
+console.log(`Resultado usando una función declara: ${areaDeTriangulo(15,8)}`);
+
+//función expresada
+const areaTriangulo = function (base,altura){
+ return (base * altura)/2;
+}
+console.log(`El resultado usando una funcion expresada: ${areaTriangulo(15,8)}`);
+
+//arrow function
+const calculaArea3 = (base, altura) => base*altura/2;
+
+console.log(`Resultado usando arrow function: ${calculaArea3(15,8)}`);
 
 
+// ¿Qué sucede si uso console.log como retorno?
+const imprimirArea = (base, altura) => console.log(calculaArea3(base, altura));
+imprimirArea(12, 20);
+
+const calcularAreaCirculo = radio => Math.PI * radio ** 2;
+
+const imprimirAreaCirculo = (radio) => {
+  document.getElementById("areaCirculo").innerText = calcularAreaCirculo(radio).toFixed(2);
+};
+imprimirAreaCirculo(5);
 
 
+const saludarPersona = (nombre) => console.log(`Hola ${nombre}, ya nos vamos a descansar`);
 
+saludarPersona("Perla");
 
 /*
  ------------ Parámetros por defecto -----------------------
@@ -138,7 +172,7 @@ Inicializa un parámetro de la función, si no se envía el argumento cuando se 
 */
 
 
-
+console.log(parseInt(`5`)); // 5 (base)
 
 
 /*
@@ -148,7 +182,149 @@ Inicializa un parámetro de la función, si no se envía el argumento cuando se 
  Se pasa en el argumento como referencia ( sin parentesis).
  */
 
+ const imprimirMensaje = ( fncCallBack ) => fncCallBack("Hola Ch54");
+                                            // 18("Hola Ch54");
+                                            // "patito"("Hola Ch54");
+                                            // console.log("Hola Ch54");
+                                            // undefined("Hola Ch54");
+
+ // imprimirMensaje( 18 ); // fncCallBack is not a function
+ // imprimirMensaje( "Patito" ); // fncCallBack is not a function
+ imprimirMensaje( console.log ); // "Hola Ch54"
+ // imprimirMensaje( console.log("Luis") ); //  fncCallBack is not a function
+ // imprimirMensaje( undefined ); //  fncCallBack is not a function
+
+const enviarParrafo = (mensaje) => {
+  const saluda = "Hola, buen día";
+   const referencia = document.getElementById("saludo-callback");
+   referencia.innerHTML = `${saluda} ${mensaje}`;
+}
+
+imprimirMensaje(enviarParrafo );
+
+// usando la función imprimirMensaje, enviar un callback para que
+ // imprima con alert
+
+ //imprimirMensaje(alert);
+
+ /*
+  Realizar una función que sume dos numeros y que imprima
+  el resultado.
+   - inicialmente se imprimirá en la consola
+   - es posible que se te pida imprimir en el dom
+   - es posible que se te pida imprimir en un alert
+*/
+
+const sumarDosNumeros = ( a, b) => a  + b;
+
+/* const sumarEImprimir = ( a, b , opcion = "consola") => {
+   const resultado = sumarDosNumeros(a, b);
+   const mensaje = `La suma de ${a} + ${b} es: ${resultado}`;
+    //imprimir en consola
+   if( opcion === "consola") console.log(mensaje);
+   else if (opcion === "parrafo") document.getElementById("resultado-sumatoria").innerText = mensaje;
+   else if (opcion === "h2")document.getElementById("resultadoh2-sumatoria").innerText = mensaje;
+   else alert(mensaje)
+} */
+
+   const sumarEImprimir = ( a, b , imprimir = console.log) => {
+   const resultado = sumarDosNumeros(a, b);
+   const mensaje = `La suma de ${a} + ${b} es: ${resultado}`;
+   imprimir(mensaje)
+}
+sumarEImprimir( 10, 14); // se imprimr en consola 
+
+const imprimirEnDOMParagraph = (mensaje) =>{
+  const refParagraph = document.getElementById("resultado-sumatoria");
+  refParagraph.innerText = mensaje;
+}
+
+const imprimirEnDOMH2 = (mensaje) =>{
+  const refParagraph = document.getElementById("resultadoh2-sumatoria");
+  refParagraph.innerText = mensaje;
+}
+
+sumarEImprimir( 10, 14, imprimirEnDOMParagraph); // se imprime en paragraph
+
+sumarEImprimir( 10, 14, imprimirEnDOMH2); // se imprime en h2
+
+//sumarEImprimir(10,14, alert);
 
 
 
+// -------------- Recursividad ---------------------
+/*
+  Una función recursiva es una función que se llama así misma durante su ejecución.
+
+  Se utilizan en algoritmos y soluciones que se basan en la división y conquista
+  como cálculos matemáticos, recorrido de estructura de datos y algoritmos de búsqueda
+  y ordenamiento.
+
+  Patrón:
+    function nombreFuncionRecursiva( parametro  ){
+        if( condicionParo){
+            return expresión;
+        }
+        else {
+            // llamada recursiva
+            nombreFuncionRecursiva( nuevoParametro );
+        }
+    }
+*/
+
+// Calcular el factorial de un número
+// factorial de 5: 5 * 4 * 3 * 2 * 1;
+function factorialConCicloFor( numero ) {
+    let factorial = 1;
+    for (let i=0; i < numero; i++) {
+      factorial *= (numero - i); // factorial = factorial * (numero - i);
+      console.log(`i: ${i}, factorial: ${factorial}, numero: ${numero - i}` );
+    }
+    return factorial;
+}
+console.log(`El factorial de 5 es: ${factorialConCicloFor(5)}`); // 120
+
+
+// Calcular el factorial de un número
+// factorial de 5: 5 * 4 * 3 * 2 * 1;
+function factorialConCicloFor( numero ) {
+    let factorial = 1;
+    for (let i=0; i < numero; i++) {
+      factorial *= (numero - i); 
+      console.log(`i: ${i}, factorial: ${factorial}, numero: ${numero - i}` );
+    }
+    return factorial;
+}
+console.log(`El factorial de 5 es: ${factorialConCicloFor(5)}`); // 120
+
+/*
+    parámetro   recursividad(n-1)   returnFnc
+     5              5-1 = 4            120
+     4              4-1 = 3            24
+     3              3-1 = 2            6       
+     2              2-1 = 1            2         
+     1               ----              1
   
+*/
+
+/*
+ Generar una función recursiva que muestre en consola un saludo
+ donde se indique el número saludo deseado.
+  ej: saludar 10 veces
+  Saludo 1
+  Saludo 2
+  Saludo 3
+  Saludo 4
+  Saludo 5
+  Saludo 6
+   ....
+  Saludo 10
+*/
+
+function saludoConRecursividad( numeroSaludos){
+  if(numeroSaludos <= 0) return numeroSaludos;
+  const result = saludoConRecursividad(numeroSaludos - 1 ) ;
+  console.log(`Saludo ${numeroSaludos}`);
+  
+}
+console.log( saludoConRecursividad(10));
