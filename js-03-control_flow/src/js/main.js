@@ -234,6 +234,94 @@ console.log(velocidadVentiladorConIf(4));
 
 */
 
+const verficarPagoDeTarjeta = ( estaPagado ) =>{
+    let msj;
+    if( estaPagado) {
+        msj = "La tarjta ha sido pagada";
+    } else {
+        msj = "La tarjeta no ha sido pagada";
+    }
+    return msj;
+}
+console.log( verficarPagoDeTarjeta( true ) );
+console.log( verficarPagoDeTarjeta( false ) );
+
+// Versión con operador ternario
+
+const verficarPagoDeTarjetaUsandoTernario = ( estaPagado ) =>{
+    return estaPagado ? "La tarjeta ha sido pagada" : "La tarjeta no ha sido pagada";
+}
+console.log( verficarPagoDeTarjetaUsandoTernario( true ) ); // "La tarjta ha sido pagada"
+console.log( verficarPagoDeTarjetaUsandoTernario( false ) ); // "La tarjeta no ha sido pagada"
+
+
+/*
+ Dado un número entero, imprimir:
+ "Negativo":  si el número es menor a 0.
+ "Cero":  si el número es  0.
+ "Positivo":  si el número es mayor a cero pero menor a 100.
+ "Grande": si el número es mayor o igual a 100.
+ - Realizar una función que reciba el número y retorne el mensaje.
+ - El retorno debe ser impreso en la consola.
+ - Realizar una versión if-else, switch y operador ternario.
+*/
+
+//if-else
+const imprimirNumeroConIfElse = (numero) => {
+    let valor;
+    if (numero < 0) {
+        valor = "Negativo";
+    } else if (numero === 0) {
+        valor = "Cero";
+    } else if (numero > 0 && numero < 100) {
+        valor = "Positivo";
+    } else if (numero >= 100) {
+        valor = "Grande";
+    }
+    return valor;
+};
+const result = imprimirNumeroConIfElse(25);
+console.log(result);
+
+// switch
+function evaluarElNumeroSwitch(numero) {
+
+    switch ( true ) {
+        case (numero < 0):
+            mensaje = "Negativo";
+            break;
+        case (numero === 0):
+            mensaje = "Cero";
+            break;
+        case (numero >0 && numero < 100):
+            mensaje = "Positivo";
+            break;
+        case (numero >= 100):
+            mensaje = "Grande";
+            break;
+        default:
+            mensaje = "Numero desconocido";
+    }
+    return mensaje;
+};
+
+console.log(evaluarElNumeroSwitch(-45) ); // Negativo
+console.log(evaluarElNumeroSwitch(0) ); // Cero
+console.log(evaluarElNumeroSwitch(45) ); // Positivo
+console.log(evaluarElNumeroSwitch(100) ); // Grande
+
+// operador ternario
+const evaluarNumeroTernario = (num) => {
+    return num < 0 ? "Negativo" :
+           num === 0 ? "Cero" :
+           num < 100 ? "Positivo" :
+           "Grande";
+}
+console.log(evaluarNumeroTernario(-5));
+console.log(evaluarNumeroTernario(0));
+console.log(evaluarNumeroTernario(99));
+console.log(evaluarNumeroTernario(1000));
+
 
 
 
