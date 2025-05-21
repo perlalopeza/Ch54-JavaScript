@@ -31,3 +31,4 @@ const insertMainHeader = ( header )=>{
 
 }
 
+export{insertMainHeader}

@@ -79,6 +79,15 @@ Características clave de los módulos JS:
 
 // importa las funciones del footer y header e invócalos para que se ejecuten
 
+import { insertMainHeader } from "../modules/header/header.js";
+import { insertMainFooter } from "../modules/footer/footer.js";
+
+
+
+insertMainHeader(document.getElementById("header"));
+insertMainFooter(document.getElementById("footer"));
+
+
 
 
 /*
@@ -100,7 +109,52 @@ Características clave de los módulos JS:
 
 */
 
+/*
+ Crear en el HTML un input y un botón para guardar el valor en el localStorage.
+  
+  Al cargar la página, si hay un valor guardado, mostrarlo en el titulo H1 "Hola, {nombre}".
+  En caso contrario, mostrar "Hola, persona invitada".
+*/
 
+const leerNombreDelLocalStorage = () => {
+  const nombre = localStorage.getItem("nombre") || "persona invitada";
+  return nombre;
+}
+const insertarNombreEnElDOM = () => {
+  const refH2 = document.querySelector("#bienvenida");
+  const nombre = leerNombreDelLocalStorage();
+  // refH1.innerHTML = `Hola, ${nombre}`;
+  refH2.textContent = `Hola, ${nombre}`;
+}
+insertarNombreEnElDOM();
+
+const manejoDelBotonGuardar = () =>{
+  const refInput = document.querySelector("#nombreInput");
+  const newName = refInput.value;
+  newName && localStorage.setItem("nombre", newName);
+}
+
+/* const nombreInput = document.getElementById('nombreInput');
+const boton = document.getElementById('btnGuardar');
+const saludoH1 = document.getElementById('saludo');
+
+const nombreGuardado = localStorage.getItem('nombre');
+if (nombreGuardado) {
+  saludoH1.textContent = `Hola, ${nombreGuardado}`;
+} else {
+  saludoH1.textContent = 'Hola, persona invitada';
+}
+boton.addEventListener('click', () => {
+  const nombre = nombreInput.value;
+  if (nombre) {
+    saludoH1.textContent = `Hola, ${nombre}`;
+    localStorage.setItem('nombre', nombre); 
+  } else {
+    saludoH1.textContent = 'Hola, persona invitada';
+    localStorage.removeItem('nombre'); 
+  }
+  nombreInput.value = '';
+}); */
 
 
 /*
