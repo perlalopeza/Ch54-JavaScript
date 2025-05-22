@@ -132,30 +132,19 @@ const manejoDelBotonGuardar = () =>{
   const refInput = document.querySelector("#nombreInput");
   const newName = refInput.value;
   newName && localStorage.setItem("nombre", newName);
+  insertarNombreEnElDOM();
 }
 
-/* const nombreInput = document.getElementById('nombreInput');
-const boton = document.getElementById('btnGuardar');
-const saludoH1 = document.getElementById('saludo');
 
-const nombreGuardado = localStorage.getItem('nombre');
-if (nombreGuardado) {
-  saludoH1.textContent = `Hola, ${nombreGuardado}`;
-} else {
-  saludoH1.textContent = 'Hola, persona invitada';
-}
-boton.addEventListener('click', () => {
-  const nombre = nombreInput.value;
-  if (nombre) {
-    saludoH1.textContent = `Hola, ${nombre}`;
-    localStorage.setItem('nombre', nombre); 
-  } else {
-    saludoH1.textContent = 'Hola, persona invitada';
-    localStorage.removeItem('nombre'); 
-  }
-  nombreInput.value = '';
-}); */
+// No lo debemos hacer
+//window.aLlamadaBotonGuardar = manejoDelBotonGuardar;
+const refSaveButton = document.getElementById("btnGuardar");
+refSaveButton.addEventListener("click", manejoDelBotonGuardar);
 
+const refNameInput = document.getElementById("nombreInput");
+refNameInput.addEventListener( "keydown" , ( event )=>{
+  console.log(event.key);
+});
 
 /*
   Programación síncrona.
@@ -181,11 +170,11 @@ const tercerPaso = () => {
   console.log("03 - Fin de mi programa");
 };
 
-/*
-primerPaso();
+
+/* primerPaso();
 segundoPaso(); // Este proceso demora tiempo
-tercerPaso();
-*/
+tercerPaso(); */
+
 
 /*
  Programación asíncrona.
@@ -207,6 +196,15 @@ tercerPaso();
 
 */
 
+const saludarTranscurridoXSeg = (milisegundos) =>{
 
+  const saludar=(nombre)=> alert(`hola ${nombre}`);
+
+  setTimeout(saludar, milisegundos, "Neo")
+}
+/* console.log("Antes de saludar");
+saludarTranscurridoXSeg(5000);
+console.log("Despues de saludar");
+ */
 
 
