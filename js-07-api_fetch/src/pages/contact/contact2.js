@@ -22,22 +22,25 @@
  3.- Rejected: La promesa se rechaza con un razón
 
 */
-const vueltasAleatorias = (min=1, max=10)=> Math.floor(Math.random()*( max - min + 1)) + min;
+import { insertMainHeader } from "../../modules/header/header.js";
+insertMainHeader(document.getElementById("header"));
+
+const vueltasAleatorias = (min = 1, max = 10) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 
-const irPorElElote= ( horaDelDia ) =>{
+const irPorElElote = (horaDelDia) => {
 
-   // const miPromesa = new Promise( fncCallBack  );
-   const miPromesa = new Promise( ( fncCallBackResolve, fncCallBackReject )=>{
-    console.log("Voy por el elote en la " + horaDelDia); // esta tarea pude demorar mucho o poco
-       if( horaDelDia === "día" || horaDelDia === "tarde" ){
-          fncCallBackResolve( {mensaje:"Toma tu elote que está dentro de una bolsa", vueltas: vueltasAleatorias() });
-       } else {
-          fncCallBackReject( {error: 404, descripcion: "Elote no fue encontrado"}  );
-       }
-    } );
+    // const miPromesa = new Promise( fncCallBack  );
+    const miPromesa = new Promise((fncCallBackResolve, fncCallBackReject) => {
+        console.log("Voy por el elote en la " + horaDelDia); // esta tarea pude demorar mucho o poco
+        if (horaDelDia === "día" || horaDelDia === "tarde") {
+            fncCallBackResolve({ mensaje: "Toma tu elote que está dentro de una bolsa", vueltas: vueltasAleatorias() });
+        } else {
+            fncCallBackReject({ error: 404, descripcion: "Elote no fue encontrado" });
+        }
+    });
 
-    return miPromesa;   
+    return miPromesa;
 }
 
 
@@ -52,17 +55,17 @@ const irPorElElote= ( horaDelDia ) =>{
  *  
  */
 
-const numDeVueltas = ( number ) =>{
+const numDeVueltas = (number) => {
 
-   const miPromesa = new Promise( ( fncCallBackResolve, fncCallBackReject )=>{
-    console.log("el numero de vueltas es: "+ number);
-       if( number <= 2 ){
-          fncCallBackResolve("ñomi ñomi, me comi mi elote");
-       } else {
-          fncCallBackReject( {error: 404, descripcion: "upss se me cayo el elote"}  );
-       }       
-   } );
-return miPromesa;
+    const miPromesa = new Promise((fncCallBackResolve, fncCallBackReject) => {
+        console.log("el numero de vueltas es: " + number);
+        if (number <= 2) {
+            fncCallBackResolve("ñomi ñomi, me comi mi elote");
+        } else {
+            fncCallBackReject({ error: 404, descripcion: "upss se me cayo el elote" });
+        }
+    });
+    return miPromesa;
 }
 
 /* 
@@ -71,8 +74,8 @@ return miPromesa;
  Realizar una promesa que retorne en el estado resolve: "Chilito del que pica".
  La función no debe tener Reject.
 */
-const ponerChilito = () =>{
-    const promesa3 = new Promise((resolve) =>{
+const ponerChilito = () => {
+    const promesa3 = new Promise((resolve) => {
         resolve("Chilito del que pica");
     });
     return promesa3;
@@ -96,7 +99,7 @@ irPorElElote( tiempo )
     .finally( ()=> console.log("Se ha terminado tu promesa")  ); */
 
 
-    
+
 /*    const tiempo = "tarde"; 
 irPorElElote( tiempo )
     .then( ( response )=> {
@@ -114,35 +117,68 @@ irPorElElote( tiempo )
     .finally( ()=> console.log("Se ha terminado tu promesa")  );
  */
 
-    /* Uso de async y await */
-    const crisQuiereElote = async () =>{
-        try{
-        const tiempo = "tarde"; 
-        const response = await irPorElElote( tiempo );
+/* Uso de async y await */
+const crisQuiereElote = async () => {
+    try {
+        const tiempo = "tarde";
+        const response = await irPorElElote(tiempo);
         console.log("1ra Promesa", response);
         const respuestaBolsa = await numDeVueltas(response.vueltas);
         console.log(respuestaBolsa);
         const mensajeFinal = await ponerChilito();
         console.log(mensajeFinal);
-        }catch (error){
-            console.log("Promeza rechazada",error);
-        }
+    } catch (error) {
+        console.log("Promeza rechazada", error);
     }
+}
 
-    crisQuiereElote();
+crisQuiereElote();
 
-    // ============== Uso de la api fetch ====================
-    const leerProductos = async ( url )=> {
-        try {
-            const response = await fetch(url); // Obtener los datos en formato JSON
-            console.log(response);
-            const datosApi =  await response.json(); // Convertir de JSON a objetos de JavaScript
-            console.log( datosApi );
-            return datosApi;
-        } catch (error) {
-            console.log("No se pudo obtener los datos", error);
-        }
-      
+// ============== Uso de la api fetch ====================
+const leerProductos = async (url) => {
+    try {
+        const response = await fetch(url); // Obtener los datos en formato JSON
+        console.log(response);
+        const datosApi = await response.json(); // Convertir de JSON a objetos de JavaScript
+        console.log(datosApi);
+        return datosApi;
+    } catch (error) {
+        console.log("No se pudo obtener los datos", error);
     }
-    leerProductos("https://rickandmortyapi.com/api/character");
-   
+}
+
+
+
+const contruirTarjetasDeRickandMorty = (personajes) => {
+    const tarjetas = personajes.map((personaje, index, array) => (
+        `<div class="col-12 col-md-4 col-lg-3">
+            <div class="card mt-3">
+            <img src="${personaje.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">${personaje.name}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+            <a href="#" class="btn btn-primary">${personaje.species}</a>
+            </div>
+        </div> 
+      </div>
+     `
+    ));
+    return tarjetas;
+}
+
+const insertarTarjetasAlDom = (tarjetas, idDOM = "cards") => {
+    const refDom = document.getElementById(idDOM);
+    refDom.innerHTML = tarjetas.join("");
+}
+
+
+const crearCardsDeRickAndMorty = async () => {
+    /* const data = await leerProductos("https://rickandmortyapi.com/api/character"); */
+    const data = await leerProductos("/public/json/rick.json");
+    const personajes = data.results;
+    console.log(personajes);
+    const tarjetas = contruirTarjetasDeRickandMorty(personajes);
+    insertarTarjetasAlDom(tarjetas);
+
+}
+crearCardsDeRickAndMorty();
